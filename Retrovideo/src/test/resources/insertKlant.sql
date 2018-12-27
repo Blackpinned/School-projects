@@ -1,0 +1,1 @@
+insert into klanten(familienaam, voornaam, straatNummer, postcode, gemeente) values("testo", "tester", "5", "9700", "Testville");

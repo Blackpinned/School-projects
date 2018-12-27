@@ -50,12 +50,14 @@ public class JDBCFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 		return super.jdbcTemplate.queryForObject("select id from films where titel = 'test'", Long.class);
 	}
 
+	@Test
 	public void read() {
 		
 		assertEquals("test", repository.read(idVanTestFilm()).get().getTitel());
 	}
 
-	public void readOnbestaandePizza() {
+	@Test
+	public void readOnbestaandeFilm() {
 		
 		assertFalse(repository.read(-1).isPresent());
 	}
