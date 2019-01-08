@@ -27,6 +27,8 @@ public class JDBCFilmRepository implements FilmRepository {
 			"select id, genreid, titel, voorraad, gereserveerd, prijs from films order by id";
 	private static final String READ =
 			"select id, genreid, titel, voorraad, gereserveerd, prijs from films where id = :id";
+	private static final String SELECT_GENREID =
+			"select id, genreid, titel, voorraad, gereserveerd, prijs from films where genreid = :genreid order by titel";
 	
 	public JDBCFilmRepository(NamedParameterJdbcTemplate template) {
 
@@ -59,6 +61,12 @@ public class JDBCFilmRepository implements FilmRepository {
 	public List<Film> findAll() {
 
 		return template.query(SELECT_ALL, filmRowMapper);
+	}
+
+	@Override
+	public List<Film> findGenreId(long genreid) {
+		
+		return template.query(SELECT_GENREID, filmRowMapper);
 	}
 
 }

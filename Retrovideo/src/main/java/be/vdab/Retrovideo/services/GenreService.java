@@ -1,14 +1,13 @@
-package be.vdab.Retrovideo.repositories;
+package be.vdab.Retrovideo.services;
 
 import java.util.List;
 import java.util.Optional;
 
 import be.vdab.Retrovideo.enitities.Genre;
 
-public interface GenreRepository {
+public interface GenreService {
 
 	Optional<Genre> read(long id);
 	
 	List<Genre> findAll();
-
 }

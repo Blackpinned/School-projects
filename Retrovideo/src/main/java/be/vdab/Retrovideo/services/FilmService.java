@@ -1,11 +1,11 @@
-package be.vdab.Retrovideo.repositories;
+package be.vdab.Retrovideo.services;
 
 import java.util.List;
 import java.util.Optional;
 
 import be.vdab.Retrovideo.enitities.Film;
 
-public interface FilmRepository {
+public interface FilmService {
 
 	void update(Film film);
 

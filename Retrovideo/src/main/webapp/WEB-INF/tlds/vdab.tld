@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd'>
 	
 	<tag-file>
 		<name>menuVoorKlant</name>
-		<path>/WEB-INF/tags/vdab/menuVoorKlant.tag</path>
+		<path>/WEB-INF/tags/vdab/menuVoorMandje.tag</path>
 	</tag-file>
 	
 	<tag-file>

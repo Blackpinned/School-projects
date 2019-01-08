@@ -1,7 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
-<%@taglib prefix='form' uri='http://www.springframework.org/tags/form'%>
 <%@taglib uri='http://vdab.be/tags' prefix='vdab'%>
 <!DOCTYPE html>
 <html lang='nl'>
@@ -10,13 +9,6 @@
 		<vdab:head title="Reserveren"/>
 	</head>
 	<body>
-		<h1>Reserveren</h1>
-		<span><c:forEach var='entry' items='${genres}'>
-				<spring:url value="/{id}" var="url">
-					<spring:param name = "id" value="${entry.id}"/>
-				</spring:url>
-				<a href="${url}"><c:out value= "${entry.naam}"/></a>
-		</c:forEach>
-		</span>
+		<h1></h1>
 	</body>
 </html>
