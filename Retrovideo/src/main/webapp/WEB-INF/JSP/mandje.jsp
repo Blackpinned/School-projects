@@ -6,9 +6,26 @@
 <html lang='nl'>
 	<head>
 		<vdab:menu/>
-		<vdab:head title=""/>
+		<vdab:head title="Mandje"/>
 	</head>
 	<body>
-		<h1></h1>
-	</body>
+	<table>
+		<tr>
+			<th>Film</th>
+			<th>Prijs</th>
+			<th><input type="submit" value="Verwijderen" id="verwijderknop">
+		</tr>
+		<c:forEach var='film' items='${mandje}'>
+			<tr>
+				<td>${film.titel}</td>
+				<td>€${film.prijs}</td>
+				<td><input type="checkbox" value="${film.id}">
+			</tr>
+		</c:forEach>
+		<tr>
+			<td>Totaal:</td>
+			<td>
+		</tr>
+	</table>
+</body>
 </html>

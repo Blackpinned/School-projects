@@ -4,3 +4,4 @@
 <title>${title}</title>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
 <link rel='stylesheet' href='<c:url value="/css/Retrovideo.css"/>'>
+<link rel='icon' href="<c:url value="/images/retrovideo.ico"/>" type='image/x-icon'>

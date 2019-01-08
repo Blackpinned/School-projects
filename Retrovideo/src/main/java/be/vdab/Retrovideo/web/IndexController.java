@@ -12,29 +12,28 @@ import be.vdab.Retrovideo.services.GenreService;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-	
+
 	GenreService genreService;
 	FilmService filmService;
 	
-	public IndexController(GenreService genreService) {
-		
-		this.genreService = genreService;
-	}
+	public IndexController(GenreService genreService, FilmService filmService) {
 
+		this.genreService = genreService;
+		this.filmService = filmService;
+	}
+	
 	@GetMapping
 	ModelAndView index() {
-		
+
 		final ModelAndView modelandview = new ModelAndView("index", "genres", genreService.findAll());
 		return modelandview;
 	}
-
-	// private static final String FILMFOTO_VIEW = "filmfoto";
-
+	
 	@GetMapping("{id}")
-	ModelAndView index(@PathVariable long id) {
-
-		final ModelAndView modelAndView = new ModelAndView("index", "genres", genreService.findAll());
-		modelAndView.addObject("films", filmService.findGenreId(id));
-		return modelAndView;
+	ModelAndView indexFilmLijst(@PathVariable long id) {
+		
+		final ModelAndView modelandview = new ModelAndView("index", "genres", genreService.findAll());
+		modelandview.addObject("films", filmService.findAll());
+		return modelandview;
 	}
 }

@@ -9,6 +9,18 @@
 		<vdab:head title="Reserveren"/>
 	</head>
 	<body>
-		<h1></h1>
+		<h1>Reserveren</h1>
+		<span><c:forEach var='entry' items='${genres}'>
+				<spring:url value="/{id}" var="url">
+					<spring:param name = "id" value="${entry.id}"/>
+				</spring:url>
+				<a href="${url}"><c:out value= "${entry.naam}"/></a>
+		</c:forEach>
+		</span>
+		<c:if test="${not empty films}">
+			<c:forEach var='film' items='${films}'>
+				<p>${film.titel}
+			</c:forEach>
+		</c:if>
 	</body>
 </html>

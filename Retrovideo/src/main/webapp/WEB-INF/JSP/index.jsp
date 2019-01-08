@@ -18,5 +18,10 @@
 				<a href="${url}"><c:out value= "${entry.naam}"/></a>
 		</c:forEach>
 		</span>
+		<c:if test="${not empty films}">
+			<c:forEach var='film' items='${films}'>
+				<img alt="${film.titel}" src="images/${film.id}.jpg" title=${film.gereserveerd < film.voorraad ? "Reservatie mogelijk" : "Reservatie niet mogelijk"}>
+			</c:forEach>
+		</c:if>
 	</body>
 </html>
