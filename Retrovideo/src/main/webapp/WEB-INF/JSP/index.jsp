@@ -25,7 +25,7 @@
 				</spring:url>
 				<a href="${urlfilm}">
 						<img alt="${film.titel}" 
-						src="images/${film.id}.jpg" 
+						src="/images/${film.id}.jpg" 
 						title='${(film.gereserveerd < film.voorraad) ? "Reservatie mogelijk" : "Reservatie niet mogelijk"}'>
 				</a>
 			</c:forEach>

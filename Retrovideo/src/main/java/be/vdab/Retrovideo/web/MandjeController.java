@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +26,7 @@ public class MandjeController {
 	}
 
 	@GetMapping
-	ModelAndView index() {
+	ModelAndView mandje() {
 		
 		return new ModelAndView("mandje", "mandje", maakFilmsVanFilmIds(mandje.getFilmIds()));
 	}
@@ -37,5 +38,14 @@ public class MandjeController {
 			filmService.read(id).ifPresent(film -> films.add(film));
 		}
 		return films;
+	}
+	
+	private static final String REDIRECT_NA_TOEVOEGEN = "redirect:/mandje";
+
+	@PostMapping
+	String toevoegenAanMandje(MandjeForm form) {
+
+		mandje.addFilmId(form.getFilmId());
+		return REDIRECT_NA_TOEVOEGEN;
 	}
 }
