@@ -6,9 +6,13 @@
 <html lang='nl'>
 	<head>
 		<vdab:menu/>
-		<vdab:head title="${film.titel}"/>
+		<vdab:head title="Tijdelijk"/>
 	</head>
 	<body>
+	<c:if test='${empty film}'>
+		<h1>Film niet gevonden</h1>
+	</c:if>
+	<c:if test='${not empty film}'>
 		<img alt="${film.titel}" src="images/${film.id}.jpg">
 		<dl>
 			<dt>Prijs</dt>
@@ -23,5 +27,6 @@
 		<c:if test="${(film.voorraad - film.gereserveerd) > 0}">
 			<input type="submit" value="In mandje" id="inmandjeknop">
 		</c:if>
+	</c:if>
 	</body>
 </html>

@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import be.vdab.Retrovideo.enitities.Film;
@@ -20,7 +20,7 @@ public class JDBCFilmRepository implements FilmRepository {
 	private final RowMapper<Film> filmRowMapper = (resultSet, rowNum) -> new Film(
 			resultSet.getLong("id"), resultSet.getLong("genreid"), resultSet.getString("titel"), resultSet.getInt("voorraad"), resultSet.getInt("gereserveerd"), resultSet.getBigDecimal("prijs")
 	);
-	private final JdbcTemplate filmtemplate;
+	private final NamedParameterJdbcTemplate filmtemplate;
 	private static final String UPDATE_FILM =
 			"update films set voorraad = :voorraad, gereserveerd = :gereserveerd where id = :id";
 	private static final String SELECT_ALL =
@@ -28,9 +28,9 @@ public class JDBCFilmRepository implements FilmRepository {
 	private static final String READ =
 			"select id, genreid, titel, voorraad, gereserveerd, prijs from films where id = :id";
 	private static final String SELECT_GENREID =
-			"select id, genreid, titel, voorraad, gereserveerd, prijs from films where genreid = :genreid order by titel";
+			"select id, genreid, titel, voorraad, gereserveerd, prijs from films where genreid = :genreid";
 	
-	public JDBCFilmRepository(JdbcTemplate filmtemplate) {
+	public JDBCFilmRepository(NamedParameterJdbcTemplate filmtemplate) {
 
 		this.filmtemplate = filmtemplate;
 	}
@@ -51,7 +51,7 @@ public class JDBCFilmRepository implements FilmRepository {
 	public Optional<Film> read(long id) {
 
 		try {
-			return Optional.of(filmtemplate.queryForObject(READ, filmRowMapper, Collections.singletonMap("id", id)));
+			return Optional.of(filmtemplate.queryForObject(READ, Collections.singletonMap("id", id), filmRowMapper));
 		} catch (final IncorrectResultSizeDataAccessException ex) {
 			return Optional.empty();
 		}
@@ -66,7 +66,7 @@ public class JDBCFilmRepository implements FilmRepository {
 	@Override
 	public List<Film> findGenreId(long genreid) {
 		
-		return filmtemplate.query(SELECT_GENREID, filmRowMapper, genreid);
+		return filmtemplate.query(SELECT_GENREID, Collections.singletonMap("genreid", genreid), filmRowMapper);
 	}
 
 }

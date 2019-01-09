@@ -11,13 +11,18 @@ import be.vdab.Retrovideo.services.FilmService;
 @Controller
 @RequestMapping("/film")
 public class FilmController {
-	
-	FilmService filmService;
 
-	@GetMapping("{id}")
-	ModelAndView index(@PathVariable long id) {
-		
-		final ModelAndView modelandview = new ModelAndView("film", "film", filmService.read(id));
+	FilmService filmService;
+	
+	public FilmController(FilmService filmService) {
+
+		this.filmService = filmService;
+	}
+	
+	@GetMapping("{filmid}")
+	ModelAndView index(@PathVariable long filmid) {
+
+		final ModelAndView modelandview = new ModelAndView("film", "film", filmService.read(filmid));
 		return modelandview;
 	}
 }
