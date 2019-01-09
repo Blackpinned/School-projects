@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang='nl'>
 	<head>
-		<vdab:menu/>
+		<vdab:menuVoorKlant/>
 		<vdab:head title=""/>
 	</head>
 	<body>

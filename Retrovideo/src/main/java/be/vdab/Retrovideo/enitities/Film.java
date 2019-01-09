@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class Film {
-
+	
 	private final long id;
 	@NotNull
 	private final long genreId;
@@ -18,9 +18,9 @@ public class Film {
 	private final int gereserveerd;
 	@NotNull
 	private final BigDecimal prijs;
-	
-	public Film(long id, long genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
 
+	public Film(long id, long genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
+		
 		this.id = id;
 		this.genreId = genreId;
 		this.titel = titel;
@@ -28,34 +28,39 @@ public class Film {
 		this.gereserveerd = gereserveerd;
 		this.prijs = prijs;
 	}
-
+	
 	public long getId() {
-
+		
 		return id;
 	}
-
+	
 	public long getGenreId() {
-
+		
 		return genreId;
 	}
-
+	
 	public String getTitel() {
-
+		
 		return titel;
 	}
-
+	
 	public int getVoorraad() {
-
+		
 		return voorraad;
 	}
-
+	
 	public int getGereserveerd() {
-
+		
 		return gereserveerd;
 	}
-
+	
 	public BigDecimal getPrijs() {
-
+		
 		return prijs;
+	}
+
+	public int getBeschikbaar() {
+
+		return voorraad - gereserveerd;
 	}
 }

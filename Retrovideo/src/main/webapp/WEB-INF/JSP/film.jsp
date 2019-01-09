@@ -22,10 +22,15 @@
 			<dt>Gereserveerd</dt>
 			<dd>${film.gereserveerd}</dd>
 			<dt>Beschikbaar</dt>
-			<dd>${film.voorraad - film.gereserveerd}</dd>
+			<dd>${film.beschikbaar}</dd>
 		</dl>
-		<c:if test="${(film.voorraad - film.gereserveerd) > 0}">
-			<input type="submit" value="In mandje" id="inmandjeknop">
+		<c:if test="${(film.beschikbaar) > 0}">
+			<spring:url value="/mandje/{filmid}" var="urlvoormandje">
+					<spring:param name = "filmid" value="${film.id}"/>
+				</spring:url>
+			<form action="<c:url value="${urlvoormandje}" />" method="GET">
+    			<input type="submit" name="In mandje" value="In mandje" />
+			</form>
 		</c:if>
 	</c:if>
 	</body>

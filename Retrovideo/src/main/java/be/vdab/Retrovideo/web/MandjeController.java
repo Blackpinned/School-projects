@@ -1,11 +1,12 @@
 package be.vdab.Retrovideo.web;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,11 +25,26 @@ public class MandjeController {
 		this.mandje = mandje;
 		this.filmService = filmService;
 	}
-
+	
 	@GetMapping
 	ModelAndView mandje() {
+
+		final ModelAndView modelandview =
+				new ModelAndView("mandje", "mandje", maakFilmsVanFilmIds(mandje.getFilmIds()));
+		modelandview.addObject("totaal", getTotaal(maakFilmsVanFilmIds(mandje.getFilmIds())));
+		return modelandview;
+	}
+	
+	@GetMapping("{filmId}")
+	ModelAndView mandjeToevoegen(@PathVariable long filmId) {
 		
-		return new ModelAndView("mandje", "mandje", maakFilmsVanFilmIds(mandje.getFilmIds()));
+		if (filmId > 0 && !mandje.getFilmIds().contains(filmId)) {
+			mandje.addFilmId(filmId);
+		}
+		final ModelAndView modelandview =
+				new ModelAndView("mandje", "mandje", maakFilmsVanFilmIds(mandje.getFilmIds()));
+		modelandview.addObject("totaal", getTotaal(maakFilmsVanFilmIds(mandje.getFilmIds())));
+		return modelandview;
 	}
 	
 	private List<Film> maakFilmsVanFilmIds(List<Long> filmIds) {
@@ -39,13 +55,15 @@ public class MandjeController {
 		}
 		return films;
 	}
-	
-	private static final String REDIRECT_NA_TOEVOEGEN = "redirect:/mandje";
 
-	@PostMapping
-	String toevoegenAanMandje(MandjeForm form) {
+	private BigDecimal getTotaal(List<Film> filmsInMandje) {
 
-		mandje.addFilmId(form.getFilmId());
-		return REDIRECT_NA_TOEVOEGEN;
+		final BigDecimal totaal = BigDecimal.ZERO;
+
+		for (final Film film : filmsInMandje) {
+			totaal.add(film.getPrijs());
+		}
+
+		return totaal;
 	}
 }

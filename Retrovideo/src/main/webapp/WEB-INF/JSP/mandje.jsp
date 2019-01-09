@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang='nl'>
 	<head>
-		<vdab:menu/>
+		<vdab:menuVoorKlant/>
 		<vdab:head title="Mandje"/>
 	</head>
 	<body>
@@ -24,7 +24,7 @@
 		</c:forEach>
 		<tr>
 			<td>Totaal:</td>
-			<td>
+			<td>${totaal}</td>
 		</tr>
 	</table>
 </body>
