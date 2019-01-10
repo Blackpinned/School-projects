@@ -15,7 +15,10 @@
 				<spring:url value="/{id}" var="url">
 					<spring:param name = "id" value="${entry.id}"/>
 				</spring:url>
+				<c:if test="${not (entry.id == current)}">
 				<a href="${url}"><c:out value= "${entry.naam}"/></a>
+				</c:if>
+				<c:if test="${entry.id == current}">${entry.naam}</c:if>
 		</c:forEach>
 		</div>
 		<c:if test="${not empty films}">
@@ -26,7 +29,7 @@
 				<a href="${urlfilm}">
 						<img alt="${film.titel}" 
 						src="/images/${film.id}.jpg" 
-						title='${(film.gereserveerd < film.voorraad) ? "Reservatie mogelijk" : "Reservatie niet mogelijk"}'>
+						title='${film.titel}: ${(film.gereserveerd < film.voorraad) ? "Reservatie mogelijk" : "Reservatie niet mogelijk"}'>
 				</a>
 			</c:forEach>
 		</c:if>

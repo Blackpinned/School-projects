@@ -36,25 +36,25 @@ public class JDBCGenreRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 		
 		final List<Genre> genres = repository.findAll();
 		assertEquals(super.countRowsInTable(GENRES), genres.size());
-
+		
 		long vorigeId = 0;
 		for (int i = 0; i < genres.size() - 1; i++) {
 			assertTrue(genres.get(i).getId() > vorigeId);
 			vorigeId = genres.get(i).getId();
 		}
 	}
-
+	
 	private long idVanTestGenre() {
-
+		
 		return super.jdbcTemplate.queryForObject("select id from genres where naam = 'test'", Long.class);
 	}
-
+	
 	@Test
 	public void read() {
 		
 		assertEquals("test", repository.read(idVanTestGenre()).get().getNaam());
 	}
-
+	
 	@Test
 	public void readOnbestaandGenre() {
 		

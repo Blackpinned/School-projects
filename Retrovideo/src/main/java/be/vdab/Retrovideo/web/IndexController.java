@@ -12,19 +12,19 @@ import be.vdab.Retrovideo.services.GenreService;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-	
+
 	GenreService genreService;
 	FilmService filmService;
 
 	public IndexController(GenreService genreService, FilmService filmService) {
-		
+
 		this.genreService = genreService;
 		this.filmService = filmService;
 	}
 
 	@GetMapping
 	ModelAndView index() {
-		
+
 		final ModelAndView modelandview = new ModelAndView("index", "genres", genreService.findAll());
 		return modelandview;
 	}
@@ -35,6 +35,7 @@ public class IndexController {
 		final ModelAndView modelandview = new ModelAndView("index", "genres", genreService.findAll());
 		if (id > 0) {
 			modelandview.addObject("films", filmService.findGenreId(id));
+			modelandview.addObject("current", id);
 		}
 		return modelandview;
 	}

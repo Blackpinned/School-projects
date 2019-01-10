@@ -31,13 +31,13 @@ public class JDBCFilmRepository implements FilmRepository {
 			"select id, genreid, titel, voorraad, gereserveerd, prijs from films where genreid = :genreid";
 	
 	public JDBCFilmRepository(NamedParameterJdbcTemplate filmtemplate) {
-
+		
 		this.filmtemplate = filmtemplate;
 	}
 	
 	@Override
 	public void update(Film film) {
-
+		
 		final Map<String, Object> parameters = new HashMap<>();
 		parameters.put("voorraad", film.getVoorraad());
 		parameters.put("gereserveerd", film.getGereserveerd());
@@ -49,7 +49,7 @@ public class JDBCFilmRepository implements FilmRepository {
 	
 	@Override
 	public Optional<Film> read(long id) {
-
+		
 		try {
 			return Optional.of(filmtemplate.queryForObject(READ, Collections.singletonMap("id", id), filmRowMapper));
 		} catch (final IncorrectResultSizeDataAccessException ex) {
@@ -59,14 +59,14 @@ public class JDBCFilmRepository implements FilmRepository {
 	
 	@Override
 	public List<Film> findAll() {
-
+		
 		return filmtemplate.query(SELECT_ALL, filmRowMapper);
 	}
-
+	
 	@Override
 	public List<Film> findGenreId(long genreid) {
 		
 		return filmtemplate.query(SELECT_GENREID, Collections.singletonMap("genreid", genreid), filmRowMapper);
 	}
-
+	
 }

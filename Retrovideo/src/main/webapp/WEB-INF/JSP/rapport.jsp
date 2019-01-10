@@ -6,9 +6,22 @@
 <html lang='nl'>
 	<head>
 		<vdab:menu/>
-		<vdab:head title=""/>
+		<vdab:head title="Rapport"/>
 	</head>
 	<body>
-		<h1></h1>
+		<h1>Rapport</h1>
+		<c:if test="${empty fouten}">
+			De reservatie is OK.
+		</c:if>
+		
+		<c:if test="${not empty fouten}">
+			De volgende reservaties zijn niet OK.
+			
+			<ul>
+				<c:forEach var="fout" items="${fouten}">
+					<li>${fout}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 	</body>
 </html>

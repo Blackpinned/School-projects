@@ -11,11 +11,13 @@ import org.springframework.web.context.annotation.SessionScope;
 @Component
 @SessionScope
 public class DefaultMandje implements Serializable, Mandje {
-
+	
 	private static final long serialVersionUID = 1L;
 	private final List<Long> filmIDs = new ArrayList<>();
 	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see be.vdab.Retrovideo.web.Mandje#addFilmId(long)
 	 */
 	@Override
@@ -24,7 +26,9 @@ public class DefaultMandje implements Serializable, Mandje {
 		filmIDs.add(id);
 	}
 	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see be.vdab.Retrovideo.web.Mandje#removeFilmId(long)
 	 */
 	@Override
@@ -33,20 +37,22 @@ public class DefaultMandje implements Serializable, Mandje {
 		final Iterator<Long> it = filmIDs.iterator();
 		
 		while (it.hasNext()) {
-			final long id = filmIDs.iterator().next();
+			long id = it.next();
 			
 			if (id == removeid) {
 				it.remove();
 			}
 		}
 	}
-
-	/* (non-Javadoc)
+	
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see be.vdab.Retrovideo.web.Mandje#getFilmIds()
 	 */
 	@Override
 	public List<Long> getFilmIds() {
-
+		
 		return filmIDs;
 	}
 }

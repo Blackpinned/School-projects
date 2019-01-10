@@ -5,33 +5,33 @@ import java.sql.Timestamp;
 import javax.validation.constraints.NotNull;
 
 public class Reservatie {
-
+	
 	@NotNull
-	private final int klantId;
+	private final long klantId;
 	@NotNull
-	private final int filmId;
+	private final long filmId;
 	@NotNull
 	private final Timestamp reservatie;
 	
-	public Reservatie(int klantId, int filmId, Timestamp reservatie) {
-
+	public Reservatie(long klantId, long filmId, Timestamp reservatie) {
+		
 		this.klantId = klantId;
 		this.filmId = filmId;
 		this.reservatie = reservatie;
 	}
-
-	public int getKlantId() {
-
+	
+	public long getKlantId() {
+		
 		return klantId;
 	}
-
-	public int getFilmId() {
-
+	
+	public long getFilmId() {
+		
 		return filmId;
 	}
-
+	
 	public Timestamp getReservatie() {
-
+		
 		return reservatie;
 	}
 	

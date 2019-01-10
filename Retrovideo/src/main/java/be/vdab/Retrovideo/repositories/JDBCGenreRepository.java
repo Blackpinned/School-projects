@@ -13,7 +13,7 @@ import be.vdab.Retrovideo.enitities.Genre;
 
 @Repository
 public class JDBCGenreRepository implements GenreRepository {
-
+	
 	private final RowMapper<Genre> genreRowMapper =
 			(resultSet, rowNum) -> new Genre(resultSet.getLong("id"), resultSet.getString("naam"));
 	private final NamedParameterJdbcTemplate template;
@@ -24,7 +24,7 @@ public class JDBCGenreRepository implements GenreRepository {
 		
 		this.template = template;
 	}
-
+	
 	@Override
 	public Optional<Genre> read(long id) {
 		
@@ -34,11 +34,11 @@ public class JDBCGenreRepository implements GenreRepository {
 			return Optional.empty();
 		}
 	}
-
+	
 	@Override
 	public List<Genre> findAll() {
 		
 		return template.query(SELECT_ALL, genreRowMapper);
 	}
-
+	
 }

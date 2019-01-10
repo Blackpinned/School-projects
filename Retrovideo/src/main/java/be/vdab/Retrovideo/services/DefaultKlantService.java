@@ -18,22 +18,28 @@ import be.vdab.Retrovideo.repositories.KlantRepository;
 public class DefaultKlantService implements KlantService {
 	
 	private final KlantRepository klantRepository;
-
+	
 	public DefaultKlantService(KlantRepository klantRepository) {
-
+		
 		this.klantRepository = klantRepository;
 	}
 	
 	@Override
 	public Optional<Klant> read(long id) {
-
+		
 		return klantRepository.read(id);
 	}
 	
 	@Override
 	public List<Klant> findAll() {
-
+		
 		return klantRepository.findAll();
+	}
+	
+	@Override
+	public List<Klant> findOpFamilieNaam(String FNInput) {
+		
+		return klantRepository.findOpFamilieNaam(FNInput);
 	}
 	
 }

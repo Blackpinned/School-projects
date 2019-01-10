@@ -27,7 +27,7 @@ import be.vdab.Retrovideo.exceptions.FilmNietGevondenException;
 @Import(JDBCFilmRepository.class)
 @Sql("/insertFilm.sql")
 public class JDBCFilmRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
-
+	
 	private static final String FILMS = "films";
 	@Autowired
 	private JDBCFilmRepository repository;
@@ -37,31 +37,31 @@ public class JDBCFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 		
 		final List<Film> films = repository.findAll();
 		assertEquals(super.countRowsInTable(FILMS), films.size());
-
+		
 		long vorigeId = 0;
 		for (final Film film : films) {
 			assertTrue(film.getId() > vorigeId);
 			vorigeId = film.getId();
 		}
 	}
-
+	
 	private long idVanTestFilm() {
-
+		
 		return super.jdbcTemplate.queryForObject("select id from films where titel = 'test'", Long.class);
 	}
-
+	
 	@Test
 	public void read() {
 		
 		assertEquals("test", repository.read(idVanTestFilm()).get().getTitel());
 	}
-
+	
 	@Test
 	public void readOnbestaandeFilm() {
 		
 		assertFalse(repository.read(-1).isPresent());
 	}
-
+	
 	@Test
 	public void update() {
 		
@@ -70,7 +70,7 @@ public class JDBCFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 		repository.update(film);
 		assertEquals(5, repository.read(idVanTestFilm()).get().getVoorraad());
 	}
-
+	
 	@Test(expected = FilmNietGevondenException.class)
 	public void updateOnbestaandePizza() {
 		

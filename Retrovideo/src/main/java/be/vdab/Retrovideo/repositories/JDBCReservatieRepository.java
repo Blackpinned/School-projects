@@ -16,22 +16,22 @@ public class JDBCReservatieRepository implements ReservatieRepository {
 	
 	private final NamedParameterJdbcTemplate template;
 	private final SimpleJdbcInsert insert;
-
+	
 	public JDBCReservatieRepository(NamedParameterJdbcTemplate template, DataSource dataSource) {
 		
 		this.template = template;
 		this.insert = new SimpleJdbcInsert(dataSource);
 		insert.withTableName("reservaties");
 	}
-
+	
 	@Override
 	public void create(Reservatie reservatie) {
-
+		
 		final Map<String, Object> kolomWaarden = new HashMap<>();
 		kolomWaarden.put("klantid", reservatie.getKlantId());
 		kolomWaarden.put("filmid", reservatie.getFilmId());
 		kolomWaarden.put("reservatie", reservatie.getReservatie());
 		insert.execute(kolomWaarden);
 	}
-
+	
 }

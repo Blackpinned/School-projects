@@ -6,9 +6,21 @@
 <html lang='nl'>
 	<head>
 		<vdab:menuVoorKlant/>
-		<vdab:head title=""/>
+		<vdab:head title="Bevestigen"/>
 	</head>
 	<body>
-		<h1></h1>
+		<h1>Bevestigen</h1>
+		<p>${aantal} film(s) voor ${klant.getNaam()}</p>
+		<spring:url value="/rapport/{klantId}" var="url">
+					<spring:param name = "klantId" value="${klant.id}"/>
+		</spring:url>
+		<form action="<c:url value="${url}"/>" method="GET" id="bevestigform">
+	    	<input type="submit" value="Bevestigen" id="bevestigknop"/>
+		</form>
+		<script>
+		document.getElementById('bevestigform').onsubmit = function() {
+		document.getElementById('bevestigknop').disabled = true;
+		};
+		</script>
 	</body>
 </html>

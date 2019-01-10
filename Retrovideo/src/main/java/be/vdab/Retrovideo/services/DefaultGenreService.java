@@ -18,22 +18,22 @@ import be.vdab.Retrovideo.repositories.GenreRepository;
 public class DefaultGenreService implements GenreService {
 	
 	private final GenreRepository genreRepositry;
-
+	
 	public DefaultGenreService(GenreRepository genreRepositry) {
-
+		
 		this.genreRepositry = genreRepositry;
 	}
 	
 	@Override
 	public Optional<Genre> read(long id) {
-
+		
 		return genreRepositry.read(id);
 	}
 	
 	@Override
 	public List<Genre> findAll() {
-
+		
 		return genreRepositry.findAll();
 	}
-
+	
 }

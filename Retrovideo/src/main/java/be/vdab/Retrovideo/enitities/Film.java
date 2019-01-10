@@ -15,10 +15,10 @@ public class Film {
 	@NotNull
 	private final int voorraad;
 	@NotNull
-	private final int gereserveerd;
+	private int gereserveerd;
 	@NotNull
 	private final BigDecimal prijs;
-
+	
 	public Film(long id, long genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
 		
 		this.id = id;
@@ -49,6 +49,11 @@ public class Film {
 		return voorraad;
 	}
 	
+	public void setGereserveerd(int gereserveerd) {
+
+		this.gereserveerd = gereserveerd;
+	}
+	
 	public int getGereserveerd() {
 		
 		return gereserveerd;
@@ -58,9 +63,9 @@ public class Film {
 		
 		return prijs;
 	}
-
+	
 	public int getBeschikbaar() {
-
+		
 		return voorraad - gereserveerd;
 	}
 }

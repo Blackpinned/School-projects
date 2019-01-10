@@ -13,11 +13,11 @@ import be.vdab.Retrovideo.repositories.ReservatieRepository;
 		isolation = Isolation.READ_COMMITTED
 )
 public class DefaultReservatieService implements ReservatieService {
-
+	
 	private final ReservatieRepository reservatieRepository;
 	
 	public DefaultReservatieService(ReservatieRepository reservatieRepository) {
-
+		
 		this.reservatieRepository = reservatieRepository;
 	}
 	
@@ -27,8 +27,8 @@ public class DefaultReservatieService implements ReservatieService {
 			isolation = Isolation.READ_COMMITTED
 	)
 	public void create(Reservatie reservatie) {
-
+		
 		reservatieRepository.create(reservatie);
-
+		
 	}
 }

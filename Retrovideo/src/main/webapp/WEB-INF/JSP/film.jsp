@@ -13,6 +13,7 @@
 		<h1>Film niet gevonden</h1>
 	</c:if>
 	<c:if test='${not empty film}'>
+		<h1>${film.titel}</h1>
 		<img alt="${film.titel}" src="/images/${film.id}.jpg" >
 		<dl>
 			<dt>Prijs</dt>
@@ -28,10 +29,15 @@
 			<spring:url value="/mandje/{filmid}" var="urlvoormandje">
 					<spring:param name = "filmid" value="${film.id}"/>
 				</spring:url>
-			<form action="<c:url value="${urlvoormandje}" />" method="GET">
-    			<input type="submit" name="In mandje" value="In mandje" />
+			<form action="<c:url value="${urlvoormandje}" />" method="GET" id="mandjeform" >
+    			<input type="submit" id="mandjeknop" value="In mandje" />
 			</form>
 		</c:if>
 	</c:if>
+	<script>
+		document.getElementById('mandjeform').onsubmit = function() {
+		document.getElementById('mandjeknop').disabled = true;
+		};
+	</script>
 	</body>
 </html>

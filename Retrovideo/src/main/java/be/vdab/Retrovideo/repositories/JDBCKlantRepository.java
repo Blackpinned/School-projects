@@ -13,7 +13,7 @@ import be.vdab.Retrovideo.enitities.Klant;
 
 @Repository
 public class JDBCKlantRepository implements KlantRepository {
-	
+
 	private final RowMapper<Klant> klantRowMapper =
 			(resultSet, rowNum) -> new Klant(resultSet.getLong("id"), resultSet.getString("familienaam"), resultSet.getString("voornaam"), resultSet.getString("straatNummer"), resultSet.getString("postcode"), resultSet.getString("gemeente"));
 	private final NamedParameterJdbcTemplate template;
@@ -21,9 +21,11 @@ public class JDBCKlantRepository implements KlantRepository {
 			"select id, familienaam, voornaam, straatNummer, postcode, gemeente from klanten order by id";
 	private final String READ =
 			"select id, familienaam, voornaam, straatNummer, postcode, gemeente from klanten where id = :id";
-	
+	private final String SELECT_OP_FAMILIENAAM =
+			"select id, familienaam, voornaam, straatNummer, postcode, gemeente from klanten where familienaam like :FNInput order by familienaam";
+
 	public JDBCKlantRepository(NamedParameterJdbcTemplate template) {
-		
+
 		this.template = template;
 	}
 
@@ -36,11 +38,17 @@ public class JDBCKlantRepository implements KlantRepository {
 			return Optional.empty();
 		}
 	}
-	
+
 	@Override
 	public List<Klant> findAll() {
 
 		return template.query(SELECT_ALL, klantRowMapper);
+	}
+
+	@Override
+	public List<Klant> findOpFamilieNaam(String FNInput) {
+
+		return template.query(SELECT_OP_FAMILIENAAM, Collections.singletonMap("FNInput", FNInput), klantRowMapper);
 	}
 
 }

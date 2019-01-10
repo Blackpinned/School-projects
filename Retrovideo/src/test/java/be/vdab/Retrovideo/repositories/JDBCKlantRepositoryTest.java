@@ -35,25 +35,25 @@ public class JDBCKlantRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 		
 		final List<Klant> klanten = repository.findAll();
 		assertEquals(super.countRowsInTable(KLANTEN), klanten.size());
-
+		
 		long vorigeId = 0;
 		for (final Klant klant : klanten) {
 			assertTrue(klant.getId() > vorigeId);
 			vorigeId = klant.getId();
 		}
 	}
-
+	
 	private long idVanTestKlant() {
-
+		
 		return super.jdbcTemplate.queryForObject("select id from klanten where familienaam = 'testo'", Long.class);
 	}
-
+	
 	@Test
 	public void read() {
 		
 		assertEquals("tester testo", repository.read(idVanTestKlant()).get().getNaam());
 	}
-
+	
 	@Test
 	public void readOnbestaandeKlant() {
 		

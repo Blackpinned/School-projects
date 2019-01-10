@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,28 +26,40 @@ public class MandjeController {
 		this.mandje = mandje;
 		this.filmService = filmService;
 	}
-	
+
 	@GetMapping
 	ModelAndView mandje() {
+
+		final MandjeForm form = new MandjeForm();
 
 		final ModelAndView modelandview =
 				new ModelAndView("mandje", "mandje", maakFilmsVanFilmIds(mandje.getFilmIds()));
 		modelandview.addObject("totaal", getTotaal(maakFilmsVanFilmIds(mandje.getFilmIds())));
+		modelandview.addObject(form);
 		return modelandview;
 	}
-	
+
+	private static final String REDIRECT_MANDJE = "redirect:/mandje";
+
 	@GetMapping("{filmId}")
-	ModelAndView mandjeToevoegen(@PathVariable long filmId) {
-		
+	String mandjeToevoegen(@PathVariable long filmId) {
+
 		if (filmId > 0 && !mandje.getFilmIds().contains(filmId)) {
 			mandje.addFilmId(filmId);
 		}
-		final ModelAndView modelandview =
-				new ModelAndView("mandje", "mandje", maakFilmsVanFilmIds(mandje.getFilmIds()));
-		modelandview.addObject("totaal", getTotaal(maakFilmsVanFilmIds(mandje.getFilmIds())));
-		return modelandview;
+
+		return REDIRECT_MANDJE;
 	}
-	
+
+	@PostMapping(params = "verwijderId")
+	String verwijderFilms(long[] verwijderId) {
+
+		for (long id : verwijderId) {
+			mandje.removeFilmId(id);
+		}
+		return REDIRECT_MANDJE;
+	}
+
 	private List<Film> maakFilmsVanFilmIds(List<Long> filmIds) {
 
 		final List<Film> films = new ArrayList<>(filmIds.size());
@@ -58,10 +71,12 @@ public class MandjeController {
 
 	private BigDecimal getTotaal(List<Film> filmsInMandje) {
 
-		final BigDecimal totaal = BigDecimal.ZERO;
+		BigDecimal totaal = BigDecimal.ZERO;
 
 		for (final Film film : filmsInMandje) {
-			totaal.add(film.getPrijs());
+			totaal = totaal.add(film.getPrijs());
+			// System.out.println(totaal);
+			// System.out.println(film.getPrijs());
 		}
 
 		return totaal;

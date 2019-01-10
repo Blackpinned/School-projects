@@ -22,14 +22,14 @@ import be.vdab.Retrovideo.enitities.Reservatie;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Import(JDBCReservatieRepository.class)
 public class JDBCReservatieRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
-
+	
 	private static final String RESERVATIES = "reservaties";
 	@Autowired
 	private JDBCReservatieRepository repository;
 	
 	@Test
 	public void create() {
-
+		
 		final int aantalReservaties = super.countRowsInTable(RESERVATIES);
 		final Timestamp toegevoegd = new Timestamp(System.currentTimeMillis());
 		final Reservatie reservatie = new Reservatie(2, 2, toegevoegd);
