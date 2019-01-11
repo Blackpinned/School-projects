@@ -1,15 +1,54 @@
 body {
-	background-color: #ffff80;
-	color: #000000;
+	background-color: #2c2c2c;
+	color: #dd0000;
 	font-family: sans-serif;
+}
+
+body ul {
+	background-color: #000000;
+}
+
+h1{
+	background-color: black;
+}
+
+.indexHeader{
+	background-color: black;
+}
+
+.margin{
+	padding: 5ex; 	
+	background-color: black;
+}
+
+body li{
+	display: inline;
+	color: #ffffff;
+	font-weight: bold;
+	padding-left: 0.5em;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+body li a{
+	color: #ffffff;
+}
+
+body li a:hover{
+	color: #808080;
 }
 
 .fullwidth {
 	width: 100%;
 }
 
+.filmdisplay {
+	background-color: #2c2c2c;
+}
+
 dd,dt {
 	margin-left: 0;
+	color: white;
 }
 
 dt {
@@ -21,7 +60,7 @@ dd {
 }
 
 label span, .fout {
-	background-color: red;
+	background-color: #ff4f4f;
 	border-bottom-right-radius: 0.5em;
 	border-top-left-radius: 0.5em;
 	border-top-right-radius: 0.5em;
@@ -43,15 +82,8 @@ label {
 	cursor: pointer;
 }
 
-input {
-	display: block;
-	margin-top: 0.2em;
-	margin-bottom: 1em;
-	font-size: 1.1em;
-}
-
 input:focus,textarea:focus,select:focus {
-	background-color: #FFFFD6
+	background-color: #ffffff
 }
 
 input[type='checkbox'] {
@@ -59,7 +91,6 @@ input[type='checkbox'] {
 }
 
 nav ul {
-	background-color: #000000;
 	padding: 0.4em 0;
 }
 
@@ -68,7 +99,7 @@ nav li {
 }
 
 nav li a {
-	color: white;
+	color: #ffffff;
 	font-weight: bold;
 	padding-left: 0.5em;
 	text-decoration: none;
@@ -76,28 +107,36 @@ nav li a {
 }
 
 nav li a:hover {
-	color: #F7FFCC;
+	color: #ff4a4a;
 }
 
-ul.zebra {
-	list-style: none;
-	padding: 0;
+table {
+	margin: 10px;
+	border-collapse: collapse;
+	color: white;
+	width: auto;
+	background-color: black;
 }
 
-ul.zebra li {
-	padding-left: 0.5em;
-	padding-bottom: 0.1em;
-	padding-top: 0.1em;
+th{
+	background-color: #800000;
+	height: 50px;
 }
 
-ul.zebra li:nth-child(odd) {
-	background-color: #F2F2E4;
+td{
+	height: 25px;
 }
 
-ul.zebra li:nth-child(even) {
-	background-color: #E6E6C8;
+td a{
+	color: white;
 }
 
-ul.zebra li:nth-child(odd):hover, ul.zebra li:nth-child(even):hover {
-	background-color: #ccff00;
+tr:hover {
+	background-color: #c0c0c0;
 }
+
+table, th, td{
+	padding: 5px;
+	border: 1px solid white;
+}
+

@@ -2,6 +2,8 @@
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <header>
 	<nav>
-		<a href="<c:url value='/'/>">Reserveren</a>
+		<ul>
+			<li><a href="<c:url value='/'/>">Reserveren</a></li>
+		</ul>
 	</nav>
 </header>

@@ -15,8 +15,7 @@
 		</c:if>
 		
 		<c:if test="${not empty fouten}">
-			De volgende reservaties zijn niet OK.
-			
+			Er ging iets mis. Gelieve te controleren: 
 			<ul>
 				<c:forEach var="fout" items="${fouten}">
 					<li>${fout}</li>

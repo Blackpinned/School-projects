@@ -11,12 +11,14 @@
 	</head>
 	<body>
 		<h1>Klanten</h1>
-		<c:url value="/klanten" var="url"/>
-		<form:form action="${url}" modelAttribute="klantForm" method="get">
-			<form:label path="familienaam">Familienaam bevat:</form:label>
-			<form:input path="familienaam" autofocus="autofocus" required="required"/>
-			<input type="submit" value="Zoeken">
-		</form:form>
+		<div class="margin">
+			<c:url value="/klanten" var="url"/>
+			<form:form action="${url}" modelAttribute="klantForm" method="get">
+				<form:label path="familienaam">Familienaam bevat:</form:label>
+				<form:input path="familienaam" autofocus="autofocus" required="required"/>
+				<input type="submit" value="Zoeken">
+			</form:form>
+		</div>
 		<c:if test="${not empty klanten}">
 			<table>
 				<tr>

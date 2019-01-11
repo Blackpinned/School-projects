@@ -1,23 +1,17 @@
 package be.vdab.Retrovideo.web;
 
-import java.util.List;
-
 public class MandjeForm {
+
+	public Long[] verwijderId;
 	
-	public List<Long> filmIds;
-	
-	public List<Long> getFilmIds() {
-		
-		return filmIds;
+	public Long[] getVerwijderId() {
+
+		return verwijderId;
 	}
 	
-	public void setFilmIds(List<Long> filmIds) {
-		
-		this.filmIds = filmIds;
+	public void setVerwijderId(Long[] verwijderId) {
+
+		this.verwijderId = verwijderId;
 	}
 	
-	public void addFilmId(long filmId) {
-		
-		filmIds.add(filmId);
-	}
 }

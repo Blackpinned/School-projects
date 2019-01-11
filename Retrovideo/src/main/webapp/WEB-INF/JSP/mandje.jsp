@@ -15,23 +15,27 @@
 		<h3>Mandje is leeg gelieve terug te keren en een film te selecteren.</h3>
 	</c:if>
 	<c:url value="/mandje" var="url"/>
-	<form:form action="${url}" modelAttribute="mandje" method="post" id="mandjeform">
+	<form:form action="${url}" modelAttribute="mandjeForm" method="post" id="mandjeform">
+	<form:errors cssClass="fout"/>
 	<table class="zebra">
 		<tr>
 			<th>Film</th>
 			<th>Prijs</th>
-			<th><c:if test="${not empty mandje}"><input type="submit" value="Verwijderen" id="verwijderknop"></c:if></th>
+			<th><input type="submit" value="Verwijderen" id="verwijderknop"></th>
 		</tr>
-		<c:forEach var='film' items='${mandje}'>
-			<tr>
-				<td>${film.titel}</td>
-				<td>€${film.prijs}</td>
-				<td><input type="checkbox" name="verwijderId" value="${film.id}"/>
-			</tr>
-		</c:forEach>
+		<c:if test="${not empty mandje}">
+			<c:forEach var='film' items='${mandje}' varStatus="status">
+				<tr>
+					<td>${film.titel}</td>
+					<td>€${film.prijs}</td>
+					<td><form:checkbox path="verwijderId" value="${film.id}"/>
+				</tr>
+			</c:forEach>
+		</c:if>
 		<tr>
 			<td>Totaal:</td>
 			<td>€${totaal}</td>
+			<td></td>
 		</tr>
 	</table>
 	</form:form>

@@ -19,54 +19,64 @@ import be.vdab.Retrovideo.services.ReservatieService;
 @Controller
 @RequestMapping("/rapport")
 public class RapportController {
-
+	
 	Mandje mandje;
 	FilmService filmService;
 	ReservatieService reservatieService;
-
+	
 	public RapportController(Mandje mandje, FilmService filmService, ReservatieService reservatieService) {
-
+		
 		this.mandje = mandje;
 		this.filmService = filmService;
 		this.reservatieService = reservatieService;
 	}
-	
+
 	@GetMapping("{klantId}")
 	ModelAndView rapport(@PathVariable long klantId) {
-		
+
 		final List<Film> filmsInMandje = maakFilmsVanFilmIds(mandje.getFilmIds());
-		
-		List<String> fouten = new ArrayList<>();
-		
-		for (Film film : filmsInMandje) {
+		final ModelAndView modelandview = new ModelAndView("rapport");
+		final List<String> fouten = new ArrayList<>();
 
-			System.out.println(film.getBeschikbaar());
-			System.out.println(film.getVoorraad());
+		if (!filmsInMandje.isEmpty()) {
 
-			if (film.getVoorraad() > film.getGereserveerd()) {
+			for (final Film film : filmsInMandje) {
 				
-				reservatieService
-						.create(new Reservatie(klantId, film.getId(), new Timestamp(System.currentTimeMillis())));
+				System.out.println(film.getBeschikbaar());
+				System.out.println(film.getVoorraad());
 				
-				film.setGereserveerd(film.getGereserveerd() + 1);
-				filmService.update(film);
-				
-				for (Iterator<Long> iterator = mandje.getFilmIds().iterator(); iterator.hasNext();) {
-					iterator.next();
-					iterator.remove();
+				if (film.getVoorraad() > film.getGereserveerd()) {
+
+					reservatieService
+							.create(new Reservatie(klantId, film.getId(), new Timestamp(System.currentTimeMillis())));
+
+					film.setGereserveerd(film.getGereserveerd() + 1);
+					filmService.update(film);
+
+					for (final Iterator<Long> iterator = mandje.getFilmIds().iterator(); iterator.hasNext();) {
+						iterator.next();
+						iterator.remove();
+					}
+
+				} else {
+
+					fouten.add("De film " + film.getTitel() + " is niet meer in voorraad");
 				}
-				
-			} else {
-				
-				fouten.add(film.getTitel());
 			}
+			modelandview.addObject("fouten", fouten);
+			
+		} else {
+			
+			fouten.add("Gelieve minstens 1 film aan het mandje toe te voegen");
+			modelandview.addObject("fouten", fouten);
 		}
-		
-		return new ModelAndView("rapport", "fouten", fouten);
-	}
-	
-	public List<Film> maakFilmsVanFilmIds(List<Long> filmIds) {
 
+		return modelandview;
+
+	}
+
+	public List<Film> maakFilmsVanFilmIds(List<Long> filmIds) {
+		
 		final List<Film> films = new ArrayList<>(filmIds.size());
 		for (final long id : filmIds) {
 			filmService.read(id).ifPresent(film -> films.add(film));
